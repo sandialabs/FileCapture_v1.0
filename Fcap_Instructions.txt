@@ -1,0 +1,97 @@
+
+
+!************************************************************************************
+!* FileCapture_v1.0.DLL - Copyright (2006) Sandia Corporation. Under the            *
+!* terms of Contract DE-AC04-94AL85000, Sandia Corporation and the United States    *
+!* Government retains certain rights in this software  .                            * 
+!*                                                                                  *
+!***********************************************************************************!
+
+******************Description and Instructions for FileCapture_v1.0.DLL*************************
+
+
+
+Description: Postprocessor for the use with GoldSim® commercial software. The program is intended 
+as a DLL for use with a GoldSim® model file. The DLL is called during a GoldSim® model simulation 
+to copy input/output files created during the simulation to a central location on a local LAN. 
+The software is used as part of a modeling package that consists of GoldSim.exe and other external 
+codes linked and executed during a GoldSim model simulation. The FileCapture_v1.0.DLL is used to 
+run Monte Carlo analyses with a GoldSim® simulation. Thus any input or output file can be captured, 
+when the simulation is run locally or when using the distributed processing (i.e., multi-processor run) 
+feature in GoldSim.  Using the input file 'FileCapture.in' to list the filenames 
+and path, FileCapture_v1.0.DLL copies the files listed in 'FileCapture.in' from each node on the
+LAN to a folder called 'FCAP Files' created in the location give as the path. The DLL will execute 
+onece for each realization and append a number to each file copied as an identifier for which realization
+the file was generated (e.g. file.dat is copied as file_00001.dat for realization 1).
+
+
+
+             *****************Instructions for Use****************************
+
+If you are using the pre-compiled DLL it has been compiled for Windows 2000/XP
+operating systems. You must first link the DLL to a GoldSim model file using the 
+external DLL function within the GoldSim code. Then EDIT the FileCapture.in file.
+
+LINKING TO GOLDSIM:
+
+Create an External DLL element in GoldSim. Define two input values
+passed by GoldSim to the DLL and one output value from the DLL to GoldSim:
+
+Input# 1) Switch (1==on) that is used to execute the file copy command. It is not necessary
+to have the FileCapture DLL execute during a local run.
+
+Input# 2) Realization Number. The DLL uses the realization number to tag each file it copies
+to the selected location.
+
+Output #1)The output is a scalar value that is passed to GoldSim from the DLL indicating that
+DLL has completed.
+
+
+EDIT FileCapture.in File:
+
+The first line in the FileCapture.in file is used by the DLL to identify where you want to 
+copy the files. The second line indicates how many which files are to be copied. And thereafter 
+list the files to be copied; one per line. 
+
+The basic format of the FileCapture.in file is as follows:
+
+\\computer name\folder name\        <<***enter the path to where you whan the files copied
+3                                  <<***enter the number of files to be copied
+input.dat                           <<***list the file names, one per line
+output.dat
+debug.dat
+
+
+!                                 COPYRIGHT INFORMATION:
+!************************************************************************************
+!* FileCapture_v1.0.DLL - Copyright (2006) Sandia Corporation. Under the            *
+!* terms of Contract DE-AC04-94AL85000, Sandia Corporation and the United States    *
+!* Government retains certain rights in this software  .                            * 
+!*                                                                                  *
+!***********************************************************************************!
+
+!                                        NOTICE:
+
+
+! For five (5) years from February 28, 2006, the United States Government is granted for itself and 
+! others acting on its behalf a paid-up, nonexclusive, irrevocable worldwide license for this data
+! to reproduce, prepare derivative works, and perform publicly and display publicly, by or on behalf
+! of the Government. There is provision for the possible extension of the term of this license.
+! Subsequent to that period or any extension granted, the United States Government is granted for 
+! itself and others action on its behalf a paid-up, nonexclusive, irrevocable worldwide license for 
+! this data to reproduce, prepare derivative works, and perform publicly and display publicly, and
+! to permit others to do so. The specific term of the license can be identified by inquiry made to
+! Sandia Corporation or DOE.
+
+! NEITHER THE UNITED STATES GOVERNMENT, NOR THE UNITED STATES DEPARTMENT OF ENERGY, NOR SANDIA
+! CORPORATION, NOR ANY OF THEIR EMPLOYEES, MAKES ANY WARRANTY, EXPRESS OR IMPLIED, OR ASSUMES
+! ANY LEGAL LIABILITY OR RESPONSIBILITY FOR THE ACCURACY, COMPLETENESS, OR USEFULNESS OF ANY 
+! INFORMATION, APPARATUS, PRODUCT, OR PROCESS DISCLOSED, OR REPRESENTS THAT ITS USE WOULD NOT
+! INFRINGE PRIVATELY OWNED RIGHTS.
+
+! Any licensee of this software has the obligation and responsibility to abide by the
+! applicable export control laws, regulations, and general prohibitions relating to the
+! export of technical data. Failure to obtain and export control license or other authority
+! from the Government may result in criminal liability under U.S. Laws.
+
+!                                    (End of Notice)
